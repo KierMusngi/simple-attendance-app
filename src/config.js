@@ -4,7 +4,8 @@ const config = {
     basename: '',
     defaultPath: '/pages/login/login3',
     fontFamily: `'Roboto', sans-serif`,
-    borderRadius: 12
+    borderRadius: 12,
+    theme: 'dark'
 };
 
 export default config;
