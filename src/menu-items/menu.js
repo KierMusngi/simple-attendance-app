@@ -1,8 +1,17 @@
 // assets
-import { IconBrandChrome, IconDashboard, IconDeviceCctv, IconUser, IconClipboardCheck } from '@tabler/icons';
+import {
+    IconBrandChrome,
+    IconDashboard,
+    IconDeviceCctv,
+    IconUser,
+    IconClipboardCheck,
+    IconMoodHappy,
+    IconUsers,
+    IconUserPlus
+} from '@tabler/icons';
 
 // constant
-const icons = { IconBrandChrome, IconDashboard, IconDeviceCctv, IconUser, IconClipboardCheck };
+const icons = { IconBrandChrome, IconDashboard, IconDeviceCctv, IconUser, IconClipboardCheck, IconMoodHappy, IconUsers, IconUserPlus };
 
 // ==============================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||============================== //
 
@@ -11,18 +20,10 @@ const menu = {
     type: 'group',
     children: [
         {
-            id: 'cam',
-            title: 'Face Recognition',
-            type: 'item',
-            url: '/sample-page',
-            icon: icons.IconDeviceCctv,
-            breadcrumbs: false
-        },
-        {
             id: 'menu-dashboard',
             title: 'Dashboard',
             type: 'item',
-            url: '/dashboard/default',
+            url: '/dashboard',
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
@@ -36,14 +37,16 @@ const menu = {
                     id: 'users',
                     title: 'Users',
                     type: 'item',
-                    url: '/icons/tabler-icons',
+                    url: '/users',
+                    icon: icons.IconUserPlus,
                     breadcrumbs: false
                 },
                 {
                     id: 'employees',
                     title: 'Employees',
                     type: 'item',
-                    url: '/icons/material-icons',
+                    url: '/employees',
+                    icon: icons.IconUsers,
                     breadcrumbs: false
                 }
             ]
@@ -52,8 +55,24 @@ const menu = {
             id: 'daily-time-records',
             title: 'Daily Time Records',
             type: 'item',
-            url: '/dashboard/default',
+            url: '/daily-time-records',
             icon: icons.IconClipboardCheck,
+            breadcrumbs: false
+        },
+        {
+            id: 'enroll',
+            title: 'Face Enrollment',
+            type: 'item',
+            url: '/face-enroll',
+            icon: icons.IconMoodHappy,
+            breadcrumbs: false
+        },
+        {
+            id: 'cam',
+            title: 'Face Recognition',
+            type: 'item',
+            url: '/face-recognition',
+            icon: icons.IconDeviceCctv,
             breadcrumbs: false
         }
     ]

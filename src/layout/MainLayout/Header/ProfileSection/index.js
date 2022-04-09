@@ -165,75 +165,73 @@ const ProfileSection = () => {
                                             <Typography variant="subtitle2">Project Admin</Typography>
                                         </Stack>
                                     </Box>
-                                    <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
-                                        <Box sx={{ p: 2 }}>
-                                            <List
-                                                component="nav"
-                                                sx={{
-                                                    width: '100%',
-                                                    maxWidth: 350,
-                                                    minWidth: 300,
-                                                    backgroundColor: theme.palette.background.paper,
-                                                    borderRadius: '10px',
-                                                    [theme.breakpoints.down('md')]: {
-                                                        minWidth: '100%'
-                                                    },
-                                                    '& .MuiListItemButton-root': {
-                                                        mt: 0.5
-                                                    }
-                                                }}
+                                    <Box sx={{ p: 2 }}>
+                                        <List
+                                            component="nav"
+                                            sx={{
+                                                width: '100%',
+                                                maxWidth: 350,
+                                                minWidth: 300,
+                                                backgroundColor: theme.palette.background.paper,
+                                                borderRadius: '10px',
+                                                [theme.breakpoints.down('md')]: {
+                                                    minWidth: '100%'
+                                                },
+                                                '& .MuiListItemButton-root': {
+                                                    mt: 0.5
+                                                }
+                                            }}
+                                        >
+                                            <ListItemButton
+                                                sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                selected={selectedIndex === 0}
+                                                onClick={(event) => handleListItemClick(event, 0, '/user/account-profile/profile1')}
                                             >
-                                                <ListItemButton
-                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                                    selected={selectedIndex === 0}
-                                                    onClick={(event) => handleListItemClick(event, 0, '/user/account-profile/profile1')}
-                                                >
-                                                    <ListItemIcon>
-                                                        <IconSettings stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
-                                                </ListItemButton>
-                                                <ListItemButton
-                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                                    selected={selectedIndex === 1}
-                                                    onClick={(event) => handleListItemClick(event, 1, '/user/social-profile/posts')}
-                                                >
-                                                    <ListItemIcon>
-                                                        <IconUser stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
-                                                    <ListItemText
-                                                        primary={
-                                                            <Grid container spacing={1} justifyContent="space-between">
-                                                                <Grid item>
-                                                                    <Typography variant="body2">Social Profile</Typography>
-                                                                </Grid>
-                                                                <Grid item>
-                                                                    <Chip
-                                                                        label="02"
-                                                                        size="small"
-                                                                        sx={{
-                                                                            bgcolor: theme.palette.warning.dark,
-                                                                            color: theme.palette.background.default
-                                                                        }}
-                                                                    />
-                                                                </Grid>
+                                                <ListItemIcon>
+                                                    <IconSettings stroke={1.5} size="1.3rem" />
+                                                </ListItemIcon>
+                                                <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
+                                            </ListItemButton>
+                                            {/* <ListItemButton
+                                                sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                selected={selectedIndex === 1}
+                                                onClick={(event) => handleListItemClick(event, 1, '/user/social-profile/posts')}
+                                            >
+                                                <ListItemIcon>
+                                                    <IconUser stroke={1.5} size="1.3rem" />
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={
+                                                        <Grid container spacing={1} justifyContent="space-between">
+                                                            <Grid item>
+                                                                <Typography variant="body2">Social Profile</Typography>
                                                             </Grid>
-                                                        }
-                                                    />
-                                                </ListItemButton>
-                                                <ListItemButton
-                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                                    selected={selectedIndex === 4}
-                                                    onClick={handleLogout}
-                                                >
-                                                    <ListItemIcon>
-                                                        <IconLogout stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
-                                                </ListItemButton>
-                                            </List>
-                                        </Box>
-                                    </PerfectScrollbar>
+                                                            <Grid item>
+                                                                <Chip
+                                                                    label="02"
+                                                                    size="small"
+                                                                    sx={{
+                                                                        bgcolor: theme.palette.warning.dark,
+                                                                        color: theme.palette.background.default
+                                                                    }}
+                                                                />
+                                                            </Grid>
+                                                        </Grid>
+                                                    }
+                                                />
+                                            </ListItemButton> */}
+                                            <ListItemButton
+                                                sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                selected={selectedIndex === 4}
+                                                onClick={handleLogout}
+                                            >
+                                                <ListItemIcon>
+                                                    <IconLogout stroke={1.5} size="1.3rem" />
+                                                </ListItemIcon>
+                                                <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
+                                            </ListItemButton>
+                                        </List>
+                                    </Box>
                                 </MainCard>
                             </ClickAwayListener>
                         </Paper>

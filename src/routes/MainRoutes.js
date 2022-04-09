@@ -16,6 +16,11 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
+const FaceRecognitionPage = Loadable(lazy(() => import('views/face-recognition')));
+const EmployeesPage = Loadable(lazy(() => import('views/employees')));
+const UsersPage = Loadable(lazy(() => import('views/users')));
+const DailyTimeRecordsPage = Loadable(lazy(() => import('views/daily-time-records')));
+const FaceEnrollPage = Loadable(lazy(() => import('views/face-enroll')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -28,7 +33,7 @@ const MainRoutes = {
             element: <DashboardDefault />
         },
         {
-            path: '/dashboard/default',
+            path: '/dashboard',
             element: <DashboardDefault />
         },
         {
@@ -54,6 +59,26 @@ const MainRoutes = {
         {
             path: '/sample-page',
             element: <SamplePage />
+        },
+        {
+            path: '/face-recognition',
+            element: <FaceRecognitionPage />
+        },
+        {
+            path: '/employees',
+            element: <EmployeesPage />
+        },
+        {
+            path: '/users',
+            element: <UsersPage />
+        },
+        {
+            path: '/daily-time-records',
+            element: <DailyTimeRecordsPage />
+        },
+        {
+            path: '/face-enroll',
+            element: <FaceEnrollPage />
         }
     ]
 };
