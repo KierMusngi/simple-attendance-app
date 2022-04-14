@@ -154,7 +154,7 @@ const ProfileSection = () => {
                         <Paper>
                             <ClickAwayListener onClickAway={handleClose}>
                                 <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
-                                    <Box sx={{ p: 2 }}>
+                                    <Box sx={{ px: 2, pt: 2 }}>
                                         <Stack>
                                             <Stack direction="row" spacing={0.5} alignItems="center">
                                                 <Typography variant="h4">Good Morning,</Typography>
@@ -165,7 +165,7 @@ const ProfileSection = () => {
                                             <Typography variant="subtitle2">Project Admin</Typography>
                                         </Stack>
                                     </Box>
-                                    <Box sx={{ p: 2 }}>
+                                    <Box sx={{ px: 2, pb: 2 }}>
                                         <List
                                             component="nav"
                                             sx={{
@@ -185,7 +185,7 @@ const ProfileSection = () => {
                                             <ListItemButton
                                                 sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                 selected={selectedIndex === 0}
-                                                onClick={(event) => handleListItemClick(event, 0, '/user/account-profile/profile1')}
+                                                onClick={(event) => handleListItemClick(event, 0, '/users/profile')}
                                             >
                                                 <ListItemIcon>
                                                     <IconSettings stroke={1.5} size="1.3rem" />

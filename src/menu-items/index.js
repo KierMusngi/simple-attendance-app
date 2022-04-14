@@ -8,7 +8,7 @@ import menu from './menu';
 
 const menuItems = {
     // items: [menu, dashboard, pages, utilities, other]
-    items: [menu]
+    items: [menu, utilities]
 };
 
 export default menuItems;

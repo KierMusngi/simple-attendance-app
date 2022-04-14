@@ -3,11 +3,11 @@ import { IconButton } from '@mui/material';
 import { IconPlus } from '@tabler/icons';
 import { useNavigate } from 'react-router';
 
-const UsersPage = () => {
+const UserProfilePage = () => {
     const navigate = useNavigate();
 
     return (
-        <MainCard title="Users">
+        <MainCard title="User Profile">
             <IconButton
                 aria-label="add"
                 size="large"
@@ -22,4 +22,4 @@ const UsersPage = () => {
     );
 };
 
-export default UsersPage;
+export default UserProfilePage;
