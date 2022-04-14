@@ -21,6 +21,9 @@ const EmployeesPage = Loadable(lazy(() => import('views/employees')));
 const UsersPage = Loadable(lazy(() => import('views/users')));
 const DailyTimeRecordsPage = Loadable(lazy(() => import('views/daily-time-records')));
 const FaceEnrollPage = Loadable(lazy(() => import('views/face-enroll')));
+const CreateEmployeePage = Loadable(lazy(() => import('views/employees/create')));
+const CreateUserPage = Loadable(lazy(() => import('views/users/create')));
+const UserProfilePage = Loadable(lazy(() => import('views/users/profile')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -69,8 +72,20 @@ const MainRoutes = {
             element: <EmployeesPage />
         },
         {
+            path: '/employees/create',
+            element: <CreateEmployeePage />
+        },
+        {
             path: '/users',
             element: <UsersPage />
+        },
+        {
+            path: '/users/create',
+            element: <CreateUserPage />
+        },
+        {
+            path: '/users/profile',
+            element: <UserProfilePage />
         },
         {
             path: '/daily-time-records',
