@@ -5,6 +5,7 @@ import { IconButton } from '@mui/material';
 import { IconPlus } from '@tabler/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import config from 'config';
 
 const EmployeesPage = () => {
     const [employees, setEmployees] = useState([]);
@@ -13,7 +14,7 @@ const EmployeesPage = () => {
     const navigate = useNavigate();
 
     const getEmployees = async () => {
-        await axios.get(`http://localhost:8080/employees`).then((res) => {
+        await axios.get(`${config.backendUri}/employees`).then((res) => {
             const employees = [];
             res.data.map((e) => {
                 employees.push({

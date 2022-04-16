@@ -5,7 +5,8 @@ const config = {
     defaultPath: '/pages/login/login3',
     fontFamily: `'Roboto', sans-serif`,
     borderRadius: 12,
-    theme: 'dark'
+    theme: 'dark',
+    backendUri: 'http://localhost:8080'
 };
 
 export default config;
