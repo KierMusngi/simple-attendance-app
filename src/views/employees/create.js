@@ -1,13 +1,16 @@
 import MainCard from 'ui-component/cards/MainCard';
-import { TextField, Button, Snackbar, Alert } from '@mui/material';
+import { TextField, Button, Snackbar, Alert, Grid } from '@mui/material';
 import { useState } from 'react';
 import axios from 'axios';
 import config from 'config';
+import { useNavigate } from 'react-router';
 
 const CreateEmployeePage = () => {
     const [open, setOpen] = useState(false);
     const [name, setName] = useState('');
     const [position, setPosition] = useState('');
+
+    const navigate = useNavigate();
 
     const saveEmployee = async () => {
         await axios
@@ -17,6 +20,8 @@ const CreateEmployeePage = () => {
             })
             .then((response) => {
                 console.log(response);
+                setName('');
+                setPosition('');
                 setOpen(true);
             })
             .catch((error) => {
@@ -57,9 +62,18 @@ const CreateEmployeePage = () => {
             />
             <br />
             <br />
-            <Button variant="contained" onClick={saveEmployee}>
-                Save
-            </Button>
+            <Grid container spacing={2} justifyContent="flex-end">
+                <Grid item>
+                    <Button variant="contained" onClick={saveEmployee}>
+                        Save
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <Button variant="contained" color="secondary" onClick={() => navigate('/employees')}>
+                        Cancel
+                    </Button>
+                </Grid>
+            </Grid>
             {success}
         </MainCard>
     );

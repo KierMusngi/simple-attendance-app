@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import DataTable from '../../ui-component/dataTable';
-import { IconButton } from '@mui/material';
+import { IconButton, Grid } from '@mui/material';
 import { IconPlus } from '@tabler/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -44,16 +44,18 @@ const EmployeesPage = () => {
         <MainCard title="Employees">
             {hasLoaded && <DataTable rows={employees} columns={columns} />}
             <br />
-            <IconButton
-                aria-label="add"
-                size="large"
-                color="primary"
-                onClick={() => {
-                    navigate('/employees/create');
-                }}
-            >
-                <IconPlus />
-            </IconButton>
+            <Grid container justifyContent="flex-end">
+                <IconButton
+                    aria-label="add"
+                    size="large"
+                    color="primary"
+                    onClick={() => {
+                        navigate('/employees/create');
+                    }}
+                >
+                    <IconPlus />
+                </IconButton>
+            </Grid>
         </MainCard>
     );
 };

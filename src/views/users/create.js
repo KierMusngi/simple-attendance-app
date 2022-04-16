@@ -1,10 +1,13 @@
 import MainCard from 'ui-component/cards/MainCard';
-import { TextField, Button, FormControlLabel, Switch, Snackbar, Alert } from '@mui/material';
+import { TextField, Button, FormControlLabel, Switch, Snackbar, Alert, Grid } from '@mui/material';
 import { useState } from 'react';
 import axios from 'axios';
 import config from 'config';
+import { useNavigate } from 'react-router';
 
 const CreateUserPage = () => {
+    const navigate = useNavigate();
+
     const [open, setOpen] = useState(false);
     const [userName, setUserName] = useState('');
     const [name, setName] = useState('');
@@ -21,6 +24,9 @@ const CreateUserPage = () => {
             })
             .then((response) => {
                 console.log(response);
+                setUserName('');
+                setName('');
+                setIsAdmin(false);
                 setOpen(true);
             })
             .catch((error) => {
@@ -74,9 +80,18 @@ const CreateUserPage = () => {
             <FormControlLabel control={<Switch value={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />} label="Set as Admin" />
             <br />
             <br />
-            <Button variant="contained" onClick={saveUser}>
-                Save
-            </Button>
+            <Grid container spacing={2} justifyContent="flex-end">
+                <Grid item>
+                    <Button variant="contained" onClick={saveUser}>
+                        Save
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <Button variant="contained" color="secondary" onClick={() => navigate('/users')}>
+                        Cancel
+                    </Button>
+                </Grid>
+            </Grid>
             {success}
         </MainCard>
     );
