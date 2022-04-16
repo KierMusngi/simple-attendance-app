@@ -1,13 +1,32 @@
 import { Snackbar, Grid, Button, Alert, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import ImageCard from 'ui-component/cards/imageCard';
 import { IconPhoto } from '@tabler/icons';
+import config from 'config';
+import axios from 'axios';
 
 const FaceEnrollPage = () => {
     const [open, setOpen] = useState(false);
     const [images, setImages] = useState([]);
     const [employee, setEmployee] = useState('');
+    const [employees, setEmployees] = useState([]);
+    const [hasLoaded, setHasLoaded] = useState(false);
+
+    const getEmployees = async () => {
+        await axios.get(`${config.backendUri}/employees`).then((res) => {
+            const employees = [];
+            res.data.map((e) => {
+                employees.push({
+                    id: e._id,
+                    name: e.name,
+                    position: e.position
+                });
+            });
+            setEmployees(employees);
+            setHasLoaded(true);
+        });
+    };
 
     const getBase64 = (file) => {
         return new Promise((resolve) => {
@@ -42,6 +61,11 @@ const FaceEnrollPage = () => {
         setOpen(true);
     };
 
+    useEffect(() => {
+        setHasLoaded(false);
+        getEmployees();
+    }, []);
+
     const success = (
         <div>
             <Snackbar
@@ -64,26 +88,13 @@ const FaceEnrollPage = () => {
         setEmployee(event.target.value);
     };
 
-    const names = [
-        'Oliver Hansen',
-        'Van Henry',
-        'April Tucker',
-        'Ralph Hubbard',
-        'Omar Alexander',
-        'Carlos Abbott',
-        'Miriam Wagner',
-        'Bradley Wilkerson',
-        'Virginia Andrews',
-        'Kelly Snyder'
-    ];
-
     const employeeSelect = (
         <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Employee</InputLabel>
             <Select labelId="demo-simple-select-label" id="demo-simple-select" value={employee} label="Employee" onChange={handleChange}>
-                {names.map((name) => (
-                    <MenuItem key={name} value={name}>
-                        {name}
+                {employees.map((emp) => (
+                    <MenuItem key={emp.name} value={emp.id}>
+                        {emp.name}
                     </MenuItem>
                 ))}
             </Select>
@@ -92,7 +103,7 @@ const FaceEnrollPage = () => {
 
     return (
         <MainCard title="Enroll Face">
-            {employeeSelect}
+            {hasLoaded && employeeSelect}
             <br />
             <br />
             <br />
