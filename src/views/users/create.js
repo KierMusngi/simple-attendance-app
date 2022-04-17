@@ -20,7 +20,7 @@ const CreateUserPage = () => {
                 password: 'a',
                 email: 'a',
                 name: name,
-                role: isAdmin ? 'admin' : 'user'
+                role: isAdmin ? 'Admin' : 'User'
             })
             .then((response) => {
                 console.log(response);
