@@ -10,6 +10,7 @@ const CreateUserPage = () => {
 
     const [open, setOpen] = useState(false);
     const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
 
@@ -17,14 +18,14 @@ const CreateUserPage = () => {
         await axios
             .post(`${config.backendUri}/users`, {
                 userName: userName,
-                password: 'a',
-                email: 'a',
+                password: password,
                 name: name,
                 role: isAdmin ? 'Admin' : 'User'
             })
             .then((response) => {
                 console.log(response);
                 setUserName('');
+                setPassword('');
                 setName('');
                 setIsAdmin(false);
                 setOpen(true);
@@ -64,7 +65,15 @@ const CreateUserPage = () => {
             />
             <br />
             <br />
-            <TextField id="filled-position" label="Password" type="password" variant="outlined" fullWidth />
+            <TextField
+                id="filled-position"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                label="Password"
+                type="password"
+                variant="outlined"
+                fullWidth
+            />
             <br />
             <br />
             <TextField
