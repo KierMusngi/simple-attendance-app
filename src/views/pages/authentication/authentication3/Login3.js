@@ -29,7 +29,7 @@ const Login = () => {
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                                     <Grid item sx={{ mb: 3 }}>
                                         <Link to="#">
-                                            <Logo />
+                                            <Typography variant="h1">face.ly</Typography>
                                         </Link>
                                     </Grid>
                                     <Grid item xs={12}>
@@ -81,9 +81,6 @@ const Login = () => {
                             </AuthCardWrapper>
                         </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xs={12} sx={{ m: 3, mt: 1 }}>
-                    <AuthFooter />
                 </Grid>
             </Grid>
         </AuthWrapper1>

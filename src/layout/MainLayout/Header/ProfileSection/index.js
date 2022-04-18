@@ -55,8 +55,11 @@ const ProfileSection = () => {
      * anchorRef is used on different componets and specifying one type leads to other components throwing an error
      * */
     const anchorRef = useRef(null);
+
     const handleLogout = async () => {
         console.log('Logout');
+        localStorage.removeItem('token');
+        navigate('/login');
     };
 
     const handleClose = (event) => {
@@ -192,34 +195,6 @@ const ProfileSection = () => {
                                                 </ListItemIcon>
                                                 <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
                                             </ListItemButton>
-                                            {/* <ListItemButton
-                                                sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                                selected={selectedIndex === 1}
-                                                onClick={(event) => handleListItemClick(event, 1, '/user/social-profile/posts')}
-                                            >
-                                                <ListItemIcon>
-                                                    <IconUser stroke={1.5} size="1.3rem" />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={
-                                                        <Grid container spacing={1} justifyContent="space-between">
-                                                            <Grid item>
-                                                                <Typography variant="body2">Social Profile</Typography>
-                                                            </Grid>
-                                                            <Grid item>
-                                                                <Chip
-                                                                    label="02"
-                                                                    size="small"
-                                                                    sx={{
-                                                                        bgcolor: theme.palette.warning.dark,
-                                                                        color: theme.palette.background.default
-                                                                    }}
-                                                                />
-                                                            </Grid>
-                                                        </Grid>
-                                                    }
-                                                />
-                                            </ListItemButton> */}
                                             <ListItemButton
                                                 sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                 selected={selectedIndex === 4}
