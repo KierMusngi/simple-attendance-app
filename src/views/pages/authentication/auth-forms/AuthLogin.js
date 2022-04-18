@@ -1,58 +1,20 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
-import {
-    Box,
-    Button,
-    Checkbox,
-    Divider,
-    FormControl,
-    FormControlLabel,
-    FormHelperText,
-    Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    Stack,
-    Typography,
-    useMediaQuery
-} from '@mui/material';
-
-// third party
-import * as Yup from 'yup';
+import { Box, Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack } from '@mui/material';
 import { Formik } from 'formik';
-
-// project imports
-import useScriptRef from 'hooks/useScriptRef';
+import { useNavigate } from 'react-router';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-
-// assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-import Google from 'assets/images/icons/social-google.svg';
-
 import config from 'config';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
 
-// ============================|| FIREBASE - LOGIN ||============================ //
-
-const FirebaseLogin = ({ ...others }) => {
+const MainLogin = ({ ...others }) => {
     const theme = useTheme();
-    const scriptedRef = useScriptRef();
-    const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const customization = useSelector((state) => state.customization);
-    const [checked, setChecked] = useState(true);
-
-    const googleHandler = async () => {
-        console.error('Login');
-    };
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -61,7 +23,6 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-    const navigate = useNavigate();
     const login = async (userName, password) => {
         await axios
             .post(`${config.backendUri}/login`, {
@@ -82,37 +43,26 @@ const FirebaseLogin = ({ ...others }) => {
         <>
             <Formik
                 initialValues={{
-                    email: 'kierm@gmail.com',
+                    email: 'kierm',
                     password: '8NVu%&y3^t2Pv$#',
                     submit: null
                 }}
-                validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
-                })}
-                onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-                    login(values.email, values.password);
-                }}
+                onSubmit={async (values) => login(values.email, values.password)}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email Address / Username</InputLabel>
+                            <InputLabel htmlFor="outlined-adornment-email-login">Username</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-login"
-                                type="email"
+                                type="text"
                                 value={values.email}
                                 name="email"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                label="Email Address / Username"
+                                label="Username"
                                 inputProps={{}}
                             />
-                            {touched.email && errors.email && (
-                                <FormHelperText error id="standard-weight-helper-text-email-login">
-                                    {errors.email}
-                                </FormHelperText>
-                            )}
                         </FormControl>
 
                         <FormControl
@@ -150,28 +100,11 @@ const FirebaseLogin = ({ ...others }) => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-                            {/* <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={checked}
-                                        onChange={(event) => setChecked(event.target.checked)}
-                                        name="checked"
-                                        color="primary"
-                                    />
-                                }
-                                label="Remember me"
-                            /> */}
-                            {/* <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
-                                Forgot Password?
-                            </Typography> */}
-                        </Stack>
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
                                 <FormHelperText error>{errors.submit}</FormHelperText>
                             </Box>
                         )}
-
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
                                 <Button
@@ -194,4 +127,4 @@ const FirebaseLogin = ({ ...others }) => {
     );
 };
 
-export default FirebaseLogin;
+export default MainLogin;
