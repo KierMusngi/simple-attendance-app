@@ -1,20 +1,54 @@
-// material-ui
-import { Typography } from '@mui/material';
-
-// project imports
+import { Grid, Typography, Card, CardMedia } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
+import Webcam from 'react-webcam';
+import { IconFaceId } from '@tabler/icons';
 
-// ==============================|| SAMPLE PAGE ||============================== //
+const FaceRecognitionPage = () => {
+    const videoConstraints = {
+        width: 600,
+        height: 600,
+        facingMode: 'user'
+    };
 
-const FaceRecognitionPage = () => (
-    <MainCard title="Face Recognition">
-        <Typography variant="body2">
-            Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif
-            ad minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in
-            reprehended in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa
-            qui officiate descent molls anim id est labours.
-        </Typography>
-    </MainCard>
-);
+    return (
+        <MainCard style={{ backgroundColor: '#EDE7F6' }}>
+            <br />
+            <br />
+            <br />
+            <br />
+            <Grid container alignItems="center" justifyContent="center" direction="column">
+                <Grid item>
+                    <Card style={{ height: videoConstraints.height, width: videoConstraints.width }}>
+                        <CardMedia>
+                            <Webcam
+                                audio={false}
+                                height={videoConstraints.height}
+                                screenshotFormat="image/jpeg"
+                                width={videoConstraints.width}
+                                videoConstraints={videoConstraints}
+                            />
+                        </CardMedia>
+                    </Card>
+                </Grid>
+                <br />
+                <br />
+                <br />
+                <br />
+                <Grid item>
+                    <IconFaceId color="#5E4BC3" size="100px" stroke="1px" />
+                </Grid>
+                <Grid item>
+                    <Typography variant="h5" color="#5E4BC3">
+                        Smile to entry
+                    </Typography>
+                </Grid>
+            </Grid>
+            <br />
+            <br />
+            <br />
+            <br />
+        </MainCard>
+    );
+};
 
 export default FaceRecognitionPage;

@@ -120,10 +120,10 @@ const FaceEnrollPage = () => {
                     <br />
                     <br />
                     <Grid item xs={12}>
-                        <IconPhoto color="#D0D0D0" size="60px" />
+                        <IconPhoto color="#909091" size="60px" stroke="1px" />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h5" color="#D0D0D0">
+                        <Typography variant="h5" color="#909091">
                             Upload face images
                         </Typography>
                     </Grid>
