@@ -47,7 +47,7 @@ const DailyTimeRecordsPage = () => {
                 .post(`${config.backendUri}/time-logs`, {
                     employeeId: employee
                 })
-                .then((response) => {
+                .then(() => {
                     setEmployee('');
                     getDailyTimeRecords();
                 })

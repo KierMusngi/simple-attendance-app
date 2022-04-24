@@ -1,4 +1,4 @@
-import { Card, CardMedia, Grid } from '@mui/material';
+import { Card, CardMedia } from '@mui/material';
 
 const ImageCard = (props) => {
     const { image } = props;

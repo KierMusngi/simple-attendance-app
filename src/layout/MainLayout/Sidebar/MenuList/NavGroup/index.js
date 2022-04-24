@@ -1,14 +1,8 @@
 import PropTypes from 'prop-types';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
-import { Divider, List, Typography } from '@mui/material';
-
-// project imports
+import { List, Typography } from '@mui/material';
 import NavItem from '../NavItem';
 import NavCollapse from '../NavCollapse';
-
-// ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 
 const NavGroup = ({ item }) => {
     const theme = useTheme();
