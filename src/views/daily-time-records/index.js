@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from 'config';
 import DataTable from 'ui-component/dataTable';
+import { CSVLink } from 'react-csv';
+import { getDownloadDate } from 'utils/downloadDate';
 
 const DailyTimeRecordsPage = () => {
     const [employee, setEmployee] = useState('');
@@ -100,11 +102,22 @@ const DailyTimeRecordsPage = () => {
             {hasLoaded && employeeSelect}
             <br />
             <br />
-            <Grid container justifyContent="flex-end">
-                <Button variant="contained" color="secondary" onClick={timeLog}>
-                    Time In
-                </Button>
-            </Grid>
+            {dtrsHasLoaded && (
+                <Grid container justifyContent="flex-end" spacing={2}>
+                    <Grid item>
+                        <CSVLink data={dtrs} filename={`DTR_REPORT_${getDownloadDate()}.csv`} style={{ textDecoration: 'none' }}>
+                            <Button variant="contained" color="primary">
+                                Download Report
+                            </Button>
+                        </CSVLink>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" color="secondary" onClick={timeLog}>
+                            Time In
+                        </Button>
+                    </Grid>
+                </Grid>
+            )}
         </MainCard>
     );
 };
