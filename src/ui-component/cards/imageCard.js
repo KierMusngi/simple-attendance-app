@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Card, CardMedia } from '@mui/material';
 
 const ImageCard = (props) => {
@@ -10,6 +11,10 @@ const ImageCard = (props) => {
             </Card>
         </div>
     );
+};
+
+ImageCard.propTypes = {
+    image: PropTypes.string
 };
 
 export default ImageCard;
