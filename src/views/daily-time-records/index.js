@@ -11,9 +11,9 @@ const DailyTimeRecordsPage = () => {
     const [employee, setEmployee] = useState('');
     const [employees, setEmployees] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);
-
     const [dtrs, setDtrs] = useState([]);
     const [dtrsHasLoaded, setDtrsHasLoaded] = useState(false);
+    const [dtrFilter, setDtrFilter] = useState('');
 
     const getEmployees = async () => {
         await axios.get(`${config.backendUri}/employees`).then((res) => {
@@ -33,6 +33,14 @@ const DailyTimeRecordsPage = () => {
     const getDailyTimeRecords = async () => {
         await axios.get(`${config.backendUri}/daily-time-records`).then((res) => {
             setDtrs(res.data);
+            setDtrsHasLoaded(true);
+        });
+    };
+
+    const getDailyTimeRecordsByEmployeeId = async (event) => {
+        await axios.get(`${config.backendUri}/daily-time-records/${event.target.value}`).then((res) => {
+            setDtrs(res.data);
+            setDtrFilter(event.target.value);
             setDtrsHasLoaded(true);
         });
     };
@@ -70,6 +78,28 @@ const DailyTimeRecordsPage = () => {
         </FormControl>
     );
 
+    const dtrFilterSelect = (
+        <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label1">Filter By</InputLabel>
+            <Select
+                labelId="demo-simple-select-label1"
+                id="demo-simple-select1"
+                value={dtrFilter}
+                label="Filter By"
+                onChange={getDailyTimeRecordsByEmployeeId}
+            >
+                <MenuItem key={'clear'} value={''}>
+                    Clear Filter
+                </MenuItem>
+                {employees.map((emp) => (
+                    <MenuItem key={emp.name} value={emp.id}>
+                        {emp.name}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
+    );
+
     const columns = [
         { field: 'id', headerName: 'Id', width: 300 },
         { field: 'employeeName', headerName: 'Employee', width: 300 },
@@ -87,6 +117,9 @@ const DailyTimeRecordsPage = () => {
 
     return (
         <MainCard title="Daily Time Records">
+            {hasLoaded && dtrFilterSelect}
+            <br />
+            <br />
             {dtrsHasLoaded && <DataTable rows={dtrs} columns={columns} />}
             <br />
             <br />
