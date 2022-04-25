@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Grid, Stack, Typography, useMediaQuery } from '@mui/material';
 import AuthWrapper1 from '../AuthWrapper1';
 import AuthCardWrapper from '../AuthCardWrapper';
 import AuthLogin from '../auth-forms/AuthLogin';
+import LogoSection from 'layout/MainLayout/LogoSection';
 
 const Login = () => {
     const theme = useTheme();
@@ -18,9 +18,7 @@ const Login = () => {
                             <AuthCardWrapper>
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                                     <Grid item sx={{ mb: 3 }}>
-                                        <Link to="#">
-                                            <Typography variant="h1">face.ly</Typography>
-                                        </Link>
+                                        <LogoSection width="300" />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Grid

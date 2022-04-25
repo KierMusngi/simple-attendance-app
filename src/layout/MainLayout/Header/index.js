@@ -41,15 +41,13 @@ const Header = ({ handleLeftDrawerToggle }) => {
                         <IconMenu2 stroke={1.5} size="1.3rem" />
                     </Avatar>
                 </ButtonBase>
+                <Box sx={{ flexGrow: 0.5 }} />
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-                    <LogoSection />
+                    <LogoSection width="150" />
                 </Box>
             </Box>
-
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
-
-            {/* notification & profile */}
             <NotificationSection />
             <ProfileSection />
         </>

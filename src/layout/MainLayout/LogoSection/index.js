@@ -1,18 +1,21 @@
 import { Link } from 'react-router-dom';
-
-// material-ui
 import { ButtonBase } from '@mui/material';
-
-// project imports
 import config from 'config';
 import Logo from 'ui-component/Logo';
+import PropTypes from 'prop-types';
 
-// ==============================|| MAIN LOGO ||============================== //
+const LogoSection = (props) => {
+    const { width } = props;
 
-const LogoSection = () => (
-    <ButtonBase disableRipple component={Link} to={config.defaultPath}>
-        <Logo />
-    </ButtonBase>
-);
+    return (
+        <ButtonBase disableRipple component={Link} to={config.defaultPath}>
+            <Logo width={width} />
+        </ButtonBase>
+    );
+};
+
+LogoSection.propTypes = {
+    width: PropTypes.string
+};
 
 export default LogoSection;

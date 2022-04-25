@@ -15,7 +15,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
         <>
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                 <Box sx={{ display: 'flex', p: 2, mx: 'auto' }}>
-                    <LogoSection />
+                    <LogoSection width="150" />
                 </Box>
             </Box>
             <BrowserView>
