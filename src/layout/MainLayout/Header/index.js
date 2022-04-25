@@ -4,6 +4,7 @@ import { Avatar, Box, ButtonBase } from '@mui/material';
 import ProfileSection from './ProfileSection';
 import NotificationSection from './NotificationSection';
 import { IconMenu2 } from '@tabler/icons';
+import LogoSection from '../LogoSection';
 
 const Header = ({ handleLeftDrawerToggle }) => {
     const theme = useTheme();
@@ -41,8 +42,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     </Avatar>
                 </ButtonBase>
                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-                    {/* <LogoSection /> */}
-                    <h5>face.ly</h5>
+                    <LogoSection />
                 </Box>
             </Box>
 
