@@ -9,6 +9,7 @@ import axios from 'axios';
 const FaceEnrollPage = () => {
     const [open, setOpen] = useState(false);
     const [images, setImages] = useState([]);
+    const [imagesBlob, setImagesBlob] = useState([]);
     const [employee, setEmployee] = useState('');
     const [employees, setEmployees] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -28,6 +29,19 @@ const FaceEnrollPage = () => {
         });
     };
 
+    const saveImages = async () => {
+        await axios
+            .post(`${config.backendUri}/users/save`, {
+                images: images
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     const getBase64 = (file) => {
         return new Promise((resolve) => {
             let baseURL = '';
@@ -41,21 +55,41 @@ const FaceEnrollPage = () => {
         });
     };
 
-    const handleFileInputChange = (e) => {
+    const convert = (e) => {
         const file = e.target.files[0];
         getBase64(file)
             .then((result) => {
                 file['base64'] = result;
-                const updatedImages = [...images, result];
-                setImages(updatedImages);
+                const updatedImagesBlob = [...imagesBlob, result];
+                setImagesBlob(updatedImagesBlob);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
 
+    const handleFileInputChange = async (e) => {
+        const data = new FormData();
+        data.append('file', e.target.files[0]);
+
+        await axios.post(`${config.backendUri}/users/save`, data).then((res) => {
+            const updatedImages = [res.data, ...images];
+            setImages(updatedImages);
+            convert(e);
+        });
+    };
+
     const enrollFace = () => {
         // implement enrollment API
+        // for (let count = 0; count < images.length; count++) {
+        //     console.log('image', images[count]);
+        //     const base64Data = images[count].replace(/^data:image\/png;base64,/, '');
+
+        //     fs.writeFile(`${count + 1}.png`, base64Data, 'base64', (err) => {
+        //         console.log(err);
+        //     });
+        // }
+        saveImages();
         setImages([]);
         setEmployee('');
         setOpen(true);
@@ -130,10 +164,10 @@ const FaceEnrollPage = () => {
                 </Grid>
             )}
             <Grid container spacing={2}>
-                {images.map((image) => {
+                {imagesBlob.map((imageBlob) => {
                     return (
                         <Grid item>
-                            <ImageCard image={image} />
+                            <ImageCard image={imageBlob} />
                         </Grid>
                     );
                 })}

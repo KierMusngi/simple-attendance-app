@@ -14,7 +14,7 @@ const ImageCard = (props) => {
 };
 
 ImageCard.propTypes = {
-    image: PropTypes.string
+    image: PropTypes.any
 };
 
 export default ImageCard;
