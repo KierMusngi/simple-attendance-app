@@ -29,19 +29,6 @@ const FaceEnrollPage = () => {
         });
     };
 
-    const saveImages = async () => {
-        await axios
-            .post(`${config.backendUri}/users/save`, {
-                images: images
-            })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
     const getBase64 = (file) => {
         return new Promise((resolve) => {
             let baseURL = '';
@@ -72,7 +59,7 @@ const FaceEnrollPage = () => {
         const data = new FormData();
         data.append('file', e.target.files[0]);
 
-        await axios.post(`${config.backendUri}/users/save`, data).then((res) => {
+        await axios.post(`${config.faceRecognitionUri}/face-recognition`, data).then((res) => {
             const updatedImages = [res.data, ...images];
             setImages(updatedImages);
             convert(e);
@@ -89,7 +76,6 @@ const FaceEnrollPage = () => {
         //         console.log(err);
         //     });
         // }
-        saveImages();
         setImages([]);
         setEmployee('');
         setOpen(true);

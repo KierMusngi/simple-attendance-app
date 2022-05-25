@@ -6,7 +6,8 @@ const config = {
     fontFamily: `'Roboto', sans-serif`,
     borderRadius: 12,
     theme: 'dark',
-    backendUri: 'http://localhost:8080'
+    backendUri: 'http://localhost:8080',
+    faceRecognitionUri: 'http://localhost:8083'
 };
 
 export default config;
