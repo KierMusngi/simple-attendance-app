@@ -2,7 +2,7 @@
     "name": "berry-material-react-free",
     "version": "3.0.1",
     "private": true,
-    "homepage": "https://berrydashboard.io/",
+    "homepage": "https://berrydashboard.io/login",
     "dependencies": {
         "@emotion/cache": "^11.4.0",
         "@emotion/react": "^11.4.0",
@@ -26,6 +26,7 @@
         "formik": "^2.2.6",
         "framer-motion": "^4.1.13",
         "history": "^5.0.0",
+        "jsonwebtoken": "^8.5.1",
         "material-ui-popup-state": "^1.8.0",
         "prop-types": "^15.7.2",
         "react": "^17.0.2",

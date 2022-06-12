@@ -6,8 +6,10 @@ import { IconPlus } from '@tabler/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import config from 'config';
+import { ValidateToken } from 'utils/auth-handler';
 
 const EmployeesPage = () => {
+    ValidateToken();
     const [employees, setEmployees] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);
 

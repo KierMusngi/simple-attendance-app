@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ValidateToken } from 'utils/auth-handler';
 
 // material-ui
 import { Grid } from '@mui/material';
@@ -15,6 +16,7 @@ import { gridSpacing } from 'store/constant';
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
+    ValidateToken();
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         setLoading(false);

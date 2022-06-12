@@ -2,8 +2,11 @@ import { Grid, Typography, Card, CardMedia } from '@mui/material';
 import { useRef, useState, useCallback, useEffect } from 'react';
 import * as faceapi from 'face-api.js';
 import MainCard from 'ui-component/cards/MainCard';
-import Webcam from 'react-webcam';
-import { IconFaceId } from '@tabler/icons';
+// import Webcam from 'react-webcam';
+import { IconFaceId, IconCheck, IconX } from '@tabler/icons';
+import config from 'config';
+import axios from 'axios';
+import { ValidateToken } from 'utils/auth-handler';
 
 faceapi.env.monkeyPatch({
     Canvas: HTMLCanvasElement,
@@ -15,9 +18,13 @@ faceapi.env.monkeyPatch({
 });
 
 const FaceRecognitionPage = () => {
+    ValidateToken();
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null);
     const [isModelLoaded, setIsModelLoaded] = useState(false);
+    const [faceDetected, setFaceDetected] = useState(false);
+    const [testImage, setTestImage] = useState([]);
+    const [name, setName] = useState('');
 
     const videoConstraints = {
         width: 600,
@@ -25,17 +32,33 @@ const FaceRecognitionPage = () => {
         facingMode: 'user'
     };
 
+    const recognize = async (snapshot) => {
+        await axios
+            .post(`${config.faceRecognitionUri}/face-recognition/recognize`)
+            .then((res) => {
+                console.log(res.data.result._label);
+                setName(res.data.result._label);
+            })
+            .catch((err) => console.log(err));
+    };
+
     const detectFace = () => {
         if (!isModelLoaded) console.log('Models are not loaded');
 
         setInterval(async () => {
+            setFaceDetected(false);
+
+            // do it here
             const detections = await faceapi.detectSingleFace(webcamRef.current).withFaceLandmarks();
-            if (detections != null) console.log(detections);
-        }, 1000);
+            if (detections != null) {
+                snapshot();
+                recognize();
+            }
+        }, 5000);
     };
 
     const startVideo = async () => {
-        const opt = { audio: false, video: true };
+        const opt = { audio: false, video: true, facingMode: 'user' };
         await navigator.mediaDevices
             .getUserMedia(opt)
             .then((stream) => {
@@ -62,12 +85,39 @@ const FaceRecognitionPage = () => {
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgSrc(imageSrc);
-        console.log(imageSrc);
     }, [webcamRef, setImgSrc]);
+
+    const deleteSnapshot = async () => {
+        await axios
+            .delete(`${config.faceRecognitionUri}/face-recognition`)
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
+    };
+
+    const uploadTestImage = async (snapshot) => {
+        await axios
+            .post(`${config.faceRecognitionUri}/face-recognition/detect-face`, { imageData: snapshot })
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
+    };
+
+    const snapshot = () => {
+        let canvas = document.createElement('canvas');
+        let video = document.getElementById('face-detect-video');
+
+        canvas.width = 420;
+        canvas.height = 420;
+
+        let ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const snapshot = canvas.toDataURL('image/jpeg');
+        uploadTestImage(snapshot);
+    };
 
     useEffect(() => {
         loadModels();
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <MainCard style={{ backgroundColor: '#EDE7F6' }}>
@@ -80,7 +130,7 @@ const FaceRecognitionPage = () => {
                     <Card style={{ height: videoConstraints.height, width: videoConstraints.width }}>
                         <CardMedia>
                             {!isModelLoaded && <p>Loading ...</p>}
-                            {isModelLoaded && (
+                            {/* {isModelLoaded && (
                                 <Webcam
                                     ref={webcamRef}
                                     audio={false}
@@ -90,8 +140,8 @@ const FaceRecognitionPage = () => {
                                     videoConstraints={videoConstraints}
                                     onPlay={startVideo}
                                 />
-                            )}
-                            {/* <video ref={webcamRef} id="video" width="600" height="600" autoPlay muted /> */}
+                            )} */}
+                            {isModelLoaded && <video ref={webcamRef} id="face-detect-video" width="600" height="600" autoPlay muted />}
                         </CardMedia>
                     </Card>
                 </Grid>
@@ -99,10 +149,22 @@ const FaceRecognitionPage = () => {
                 <br />
                 <br />
                 <br />
-                <button onClick={capture}>Capture photo</button>
-                {imgSrc && <img src={imgSrc} alt="altimg" />}
+                <p>{name}</p>
+                <button onClick={snapshot}>Capture photo</button>
+                <button onClick={deleteSnapshot}>Delete photo</button>
+                {/* {faceDetected && (
+                    <Grid item>
+                        <IconCheck color="#4BB543" size="100px" stroke="1px" />
+                    </Grid>
+                )}
+                {!faceDetected && (
+                    <Grid item>
+                        <IconX color="#FC100D" size="100px" stroke="1px" />
+                    </Grid>
+                )} */}
                 <Grid item>
-                    <IconFaceId color="#5E4BC3" size="100px" stroke="1px" />
+                    {/* <IconFaceId color={faceDetected ? "#5E4BC3"} size="100px" stroke="1px" /> */}
+                    <IconFaceId color={faceDetected ? '#4BB543' : '#FC100D'} size="100px" stroke="1px" />
                 </Grid>
                 <Grid item>
                     <Typography variant="h5" color="#5E4BC3">

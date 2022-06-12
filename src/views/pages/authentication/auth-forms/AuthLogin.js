@@ -43,8 +43,6 @@ const MainLogin = ({ ...others }) => {
         <>
             <Formik
                 initialValues={{
-                    email: 'kierm',
-                    password: '8NVu%&y3^t2Pv$#',
                     submit: null
                 }}
                 onSubmit={async (values) => login(values.email, values.password)}

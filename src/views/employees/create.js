@@ -4,8 +4,10 @@ import { useState } from 'react';
 import axios from 'axios';
 import config from 'config';
 import { useNavigate } from 'react-router';
+import { ValidateToken } from 'utils/auth-handler';
 
 const CreateEmployeePage = () => {
+    ValidateToken();
     const [open, setOpen] = useState(false);
     const [name, setName] = useState('');
     const [position, setPosition] = useState('');

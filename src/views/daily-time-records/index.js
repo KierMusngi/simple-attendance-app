@@ -6,8 +6,10 @@ import config from 'config';
 import DataTable from 'ui-component/dataTable';
 import { CSVLink } from 'react-csv';
 import { getDownloadDate } from 'utils/downloadDate';
+import { ValidateToken } from 'utils/auth-handler';
 
 const DailyTimeRecordsPage = () => {
+    ValidateToken();
     const [employee, setEmployee] = useState('');
     const [employees, setEmployees] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);

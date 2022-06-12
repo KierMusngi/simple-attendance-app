@@ -19,9 +19,11 @@ import {
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import User1 from 'assets/images/users/user-round.svg';
-import { IconLogout, IconSettings } from '@tabler/icons';
+import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
+import { ValidateToken, GetCurrentUserName } from 'utils/auth-handler';
 
 const ProfileSection = () => {
+    ValidateToken();
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
     const navigate = useNavigate();
@@ -58,6 +60,8 @@ const ProfileSection = () => {
         setOpen((prevOpen) => !prevOpen);
     };
 
+    const currentUserName = GetCurrentUserName();
+
     const prevOpen = useRef(open);
     useEffect(() => {
         if (prevOpen.current === true && open === false) {
@@ -89,20 +93,7 @@ const ProfileSection = () => {
                         lineHeight: 0
                     }
                 }}
-                icon={
-                    <Avatar
-                        src={User1}
-                        sx={{
-                            ...theme.typography.mediumAvatar,
-                            margin: '8px 0 8px 8px !important',
-                            cursor: 'pointer'
-                        }}
-                        ref={anchorRef}
-                        aria-controls={open ? 'menu-list-grow' : undefined}
-                        aria-haspopup="true"
-                        color="inherit"
-                    />
-                }
+                icon={<IconUser />}
                 label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
                 variant="outlined"
                 ref={anchorRef}
@@ -137,12 +128,9 @@ const ProfileSection = () => {
                                     <Box sx={{ px: 2, pt: 2 }}>
                                         <Stack>
                                             <Stack direction="row" spacing={0.5} alignItems="center">
-                                                <Typography variant="h4">Good Morning,</Typography>
-                                                <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                    Johne Doe
-                                                </Typography>
+                                                <Typography variant="h4">Hello!</Typography>
+                                                <Typography variant="h4">{currentUserName}</Typography>
                                             </Stack>
-                                            <Typography variant="subtitle2">Project Admin</Typography>
                                         </Stack>
                                     </Box>
                                     <Box sx={{ px: 2, pb: 2 }}>

@@ -5,8 +5,10 @@ import ImageCard from 'ui-component/cards/imageCard';
 import { IconPhoto } from '@tabler/icons';
 import config from 'config';
 import axios from 'axios';
+import { ValidateToken } from 'utils/auth-handler';
 
 const FaceEnrollPage = () => {
+    ValidateToken();
     const [open, setOpen] = useState(false);
     const [images, setImages] = useState([]);
     const [imagesBlob, setImagesBlob] = useState([]);
