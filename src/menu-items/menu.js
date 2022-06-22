@@ -28,6 +28,14 @@ const menu = {
             breadcrumbs: false
         },
         {
+            id: 'daily-time-records',
+            title: 'Daily Time Records',
+            type: 'item',
+            url: '/daily-time-records',
+            icon: icons.IconClipboardCheck,
+            breadcrumbs: false
+        },
+        {
             id: 'people',
             title: 'People',
             type: 'collapse',
@@ -50,31 +58,23 @@ const menu = {
                     breadcrumbs: false
                 }
             ]
-        },
-        {
-            id: 'daily-time-records',
-            title: 'Daily Time Records',
-            type: 'item',
-            url: '/daily-time-records',
-            icon: icons.IconClipboardCheck,
-            breadcrumbs: false
-        },
-        {
-            id: 'enroll',
-            title: 'Face Enrollment',
-            type: 'item',
-            url: '/face-enroll',
-            icon: icons.IconMoodHappy,
-            breadcrumbs: false
-        },
-        {
-            id: 'cam',
-            title: 'Face Recognition',
-            type: 'item',
-            url: '/face-recognition',
-            icon: icons.IconDeviceCctv,
-            breadcrumbs: false
         }
+        // {
+        //     id: 'enroll',
+        //     title: 'Face Enrollment',
+        //     type: 'item',
+        //     url: '/face-enroll',
+        //     icon: icons.IconMoodHappy,
+        //     breadcrumbs: false
+        // },
+        // {
+        //     id: 'cam',
+        //     title: 'Face Recognition',
+        //     type: 'item',
+        //     url: '/face-recognition',
+        //     icon: icons.IconDeviceCctv,
+        //     breadcrumbs: false
+        // }
     ]
 };
 

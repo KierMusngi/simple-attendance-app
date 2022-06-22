@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import DataTable from '../../ui-component/dataTable';
 import { IconButton, Grid } from '@mui/material';
-import { IconPlus } from '@tabler/icons';
+import { IconPlus, IconX } from '@tabler/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import config from 'config';
@@ -11,6 +11,7 @@ import { ValidateToken } from 'utils/auth-handler';
 const EmployeesPage = () => {
     ValidateToken();
     const [employees, setEmployees] = useState([]);
+    const [selected, setSelected] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);
 
     const navigate = useNavigate();
@@ -30,6 +31,24 @@ const EmployeesPage = () => {
         });
     };
 
+    const onSelectionModelChangeHandle = (ids) => {
+        const selectedIDs = new Set(ids);
+        const selectedRowData = employees.filter((row) => selectedIDs.has(row.id.toString()));
+        console.log(selectedRowData);
+        setSelected(selectedRowData);
+    };
+
+    const deleteEmployees = async (id) => {
+        await axios
+            .delete(`${config.backendUri}/employees/${id}`)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     useEffect(() => {
         setHasLoaded(false);
         getEmployees();
@@ -44,18 +63,22 @@ const EmployeesPage = () => {
 
     return (
         <MainCard title="Employees">
-            {hasLoaded && <DataTable rows={employees} columns={columns} />}
+            {hasLoaded && <DataTable rows={employees} columns={columns} onSelectionModelChangeHandler={onSelectionModelChangeHandle} />}
             <br />
             <Grid container justifyContent="flex-end">
                 <IconButton
                     aria-label="add"
                     size="large"
-                    color="primary"
+                    color="warning"
                     onClick={() => {
-                        navigate('/employees/create');
+                        selected.forEach((employee) => {
+                            deleteEmployees(employee.id);
+                            getEmployees();
+                        });
+                        window.location.reload(false);
                     }}
                 >
-                    <IconPlus />
+                    <IconX />
                 </IconButton>
             </Grid>
         </MainCard>

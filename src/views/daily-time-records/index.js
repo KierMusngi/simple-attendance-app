@@ -125,7 +125,7 @@ const DailyTimeRecordsPage = () => {
             {dtrsHasLoaded && <DataTable rows={dtrs} columns={columns} />}
             <br />
             <br />
-            <Grid container justifyContent="center" alignItems="center" direction="column">
+            {/* <Grid container justifyContent="center" alignItems="center" direction="column">
                 <Typography variant="h5" color="#D0D0D0">
                     Simulation of adding time logs
                 </Typography>
@@ -136,7 +136,7 @@ const DailyTimeRecordsPage = () => {
             </Grid>
             {hasLoaded && employeeSelect}
             <br />
-            <br />
+            <br /> */}
             {dtrsHasLoaded && (
                 <Grid container justifyContent="flex-end" spacing={2}>
                     <Grid item>

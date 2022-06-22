@@ -32,7 +32,7 @@ const MainLogin = ({ ...others }) => {
             .then((response) => {
                 console.log(response);
                 localStorage.setItem('token', response.data.token);
-                navigate('/dashboard');
+                navigate('/daily-time-records');
             })
             .catch((error) => {
                 console.log(error);
