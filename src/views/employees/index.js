@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import MainCard from 'ui-component/cards/MainCard';
 import DataTable from '../../ui-component/dataTable';
 import { IconButton, Grid } from '@mui/material';
-import { IconPlus, IconX } from '@tabler/icons';
+import { IconX } from '@tabler/icons';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import config from 'config';
 import { ValidateToken } from 'utils/auth-handler';
 
@@ -13,8 +12,6 @@ const EmployeesPage = () => {
     const [employees, setEmployees] = useState([]);
     const [selected, setSelected] = useState([]);
     const [hasLoaded, setHasLoaded] = useState(false);
-
-    const navigate = useNavigate();
 
     const getEmployees = async () => {
         await axios.get(`${config.backendUri}/employees`).then((res) => {

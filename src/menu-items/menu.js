@@ -58,15 +58,15 @@ const menu = {
                     breadcrumbs: false
                 }
             ]
-        }
-        // {
-        //     id: 'enroll',
-        //     title: 'Face Enrollment',
-        //     type: 'item',
-        //     url: '/face-enroll',
-        //     icon: icons.IconMoodHappy,
-        //     breadcrumbs: false
-        // },
+        },
+        {
+            id: 'developers',
+            title: 'Developers',
+            type: 'item',
+            url: '/developers',
+            icon: icons.IconMoodHappy,
+            breadcrumbs: false
+        },
         // {
         //     id: 'cam',
         //     title: 'Face Recognition',

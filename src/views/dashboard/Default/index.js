@@ -8,49 +8,61 @@ import { Grid } from '@mui/material';
 import EarningCard from './EarningCard';
 import PopularCard from './PopularCard';
 import TotalOrderLineChartCard from './TotalOrderLineChartCard';
-import TotalIncomeDarkCard from './TotalIncomeDarkCard';
-import TotalIncomeLightCard from './TotalIncomeLightCard';
-import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
+import axios from 'axios';
+import config from 'config';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
     ValidateToken();
     const [isLoading, setLoading] = useState(true);
+    const [counts, setCounts] = useState({});
+
+    const getDashboardCounts = async () => {
+        await axios.get(`${config.backendUri}/dashboard/counts`).then((res) => {
+            const { employeeCount, onTimeCount, lateCount, absentCount, topAttendees } = res.data;
+
+            const counts = {
+                employeeCount,
+                onTimeCount,
+                lateCount,
+                absentCount,
+                topAttendees
+            };
+
+            setCounts(counts);
+            setLoading(false);
+        });
+    };
+
     useEffect(() => {
-        setLoading(false);
+        getDashboardCounts();
     }, []);
 
+    console.log(counts);
     return (
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
-                    <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <EarningCard isLoading={isLoading} />
+                    <Grid item lg={6} md={6} sm={6} xs={12}>
+                        <EarningCard isLoading={isLoading} name={'Employees'} count={counts.employeeCount} />
                     </Grid>
-                    <Grid item lg={4} md={6} sm={6} xs={12}>
-                        <TotalOrderLineChartCard isLoading={isLoading} />
+                    <Grid item lg={6} md={6} sm={6} xs={12}>
+                        <TotalOrderLineChartCard isLoading={isLoading} name={'On time'} count={counts.onTimeCount} />
                     </Grid>
-                    <Grid item lg={4} md={12} sm={12} xs={12}>
-                        <Grid container spacing={gridSpacing}>
-                            <Grid item sm={6} xs={12} md={6} lg={12}>
-                                <TotalIncomeDarkCard isLoading={isLoading} />
-                            </Grid>
-                            <Grid item sm={6} xs={12} md={6} lg={12}>
-                                <TotalIncomeLightCard isLoading={isLoading} />
-                            </Grid>
-                        </Grid>
+                    <Grid item lg={6} md={6} sm={6} xs={12}>
+                        <TotalOrderLineChartCard isLoading={isLoading} name={'Absent'} count={counts.absentCount} />
+                    </Grid>
+                    <Grid item lg={6} md={6} sm={6} xs={12}>
+                        <EarningCard isLoading={isLoading} name={'Late'} count={counts.lateCount} />
                     </Grid>
                 </Grid>
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
-                    <Grid item xs={12} md={8}>
-                        <TotalGrowthBarChart isLoading={isLoading} />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                        <PopularCard isLoading={isLoading} />
+                    <Grid item xs={12} md={12}>
+                        <PopularCard isLoading={isLoading} topAttendees={counts.topAttendees} />
                     </Grid>
                 </Grid>
             </Grid>

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import {
-    Avatar,
     Box,
     Chip,
     ClickAwayListener,
@@ -18,7 +17,6 @@ import {
 } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
-import User1 from 'assets/images/users/user-round.svg';
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
 import { ValidateToken, GetCurrentUserName } from 'utils/auth-handler';
 

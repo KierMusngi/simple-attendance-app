@@ -1,23 +1,12 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
-
-// third-party
-import Chart from 'react-apexcharts';
+import { Box, Grid, Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
-
-import ChartDataMonth from './chart-data/total-order-month-line-chart';
-import ChartDataYear from './chart-data/total-order-year-line-chart';
-
-// assets
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
@@ -63,13 +52,8 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
 
-const TotalOrderLineChartCard = ({ isLoading }) => {
+const TotalOrderLineChartCard = ({ isLoading, name, count }) => {
     const theme = useTheme();
-
-    const [timeValue, setTimeValue] = useState(false);
-    const handleChangeTime = (event, newValue) => {
-        setTimeValue(newValue);
-    };
 
     return (
         <>
@@ -80,87 +64,24 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     <Box sx={{ p: 2.25 }}>
                         <Grid container direction="column">
                             <Grid item>
-                                <Grid container justifyContent="space-between">
+                                <Grid container alignItems="center">
                                     <Grid item>
-                                        <Avatar
-                                            variant="rounded"
-                                            sx={{
-                                                ...theme.typography.commonAvatar,
-                                                ...theme.typography.largeAvatar,
-                                                backgroundColor: theme.palette.primary[800],
-                                                color: '#fff',
-                                                mt: 1
-                                            }}
-                                        >
-                                            <LocalMallOutlinedIcon fontSize="inherit" />
-                                        </Avatar>
-                                    </Grid>
-                                    <Grid item>
-                                        <Button
-                                            disableElevation
-                                            variant={timeValue ? 'contained' : 'text'}
-                                            size="small"
-                                            sx={{ color: 'inherit' }}
-                                            onClick={(e) => handleChangeTime(e, true)}
-                                        >
-                                            Month
-                                        </Button>
-                                        <Button
-                                            disableElevation
-                                            variant={!timeValue ? 'contained' : 'text'}
-                                            size="small"
-                                            sx={{ color: 'inherit' }}
-                                            onClick={(e) => handleChangeTime(e, false)}
-                                        >
-                                            Year
-                                        </Button>
+                                        <Typography sx={{ fontSize: '10rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
+                                            {count}
+                                        </Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item sx={{ mb: 0.75 }}>
-                                <Grid container alignItems="center">
-                                    <Grid item xs={6}>
-                                        <Grid container alignItems="center">
-                                            <Grid item>
-                                                {timeValue ? (
-                                                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                        $108
-                                                    </Typography>
-                                                ) : (
-                                                    <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                        $961
-                                                    </Typography>
-                                                )}
-                                            </Grid>
-                                            <Grid item>
-                                                <Avatar
-                                                    sx={{
-                                                        ...theme.typography.smallAvatar,
-                                                        cursor: 'pointer',
-                                                        backgroundColor: theme.palette.primary[200],
-                                                        color: theme.palette.primary.dark
-                                                    }}
-                                                >
-                                                    <ArrowDownwardIcon fontSize="inherit" sx={{ transform: 'rotate3d(1, 1, 1, 45deg)' }} />
-                                                </Avatar>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography
-                                                    sx={{
-                                                        fontSize: '1rem',
-                                                        fontWeight: 500,
-                                                        color: theme.palette.primary[200]
-                                                    }}
-                                                >
-                                                    Total Order
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        {timeValue ? <Chart {...ChartDataMonth} /> : <Chart {...ChartDataYear} />}
-                                    </Grid>
-                                </Grid>
+                            <Grid item sx={{ mb: 1.25 }}>
+                                <Typography
+                                    sx={{
+                                        fontSize: '1rem',
+                                        fontWeight: 500,
+                                        color: theme.palette.secondary[200]
+                                    }}
+                                >
+                                    {name}
+                                </Typography>
                             </Grid>
                         </Grid>
                     </Box>
@@ -171,7 +92,9 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
 };
 
 TotalOrderLineChartCard.propTypes = {
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    name: PropTypes.string,
+    count: PropTypes.object
 };
 
 export default TotalOrderLineChartCard;

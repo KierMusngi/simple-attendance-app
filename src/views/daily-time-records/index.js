@@ -1,4 +1,4 @@
-import { Button, FormControl, InputLabel, Select, MenuItem, Grid, Typography } from '@mui/material';
+import { Button, FormControl, InputLabel, Select, MenuItem, Grid } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -47,10 +47,6 @@ const DailyTimeRecordsPage = () => {
         });
     };
 
-    const handleChange = (event) => {
-        setEmployee(event.target.value);
-    };
-
     const timeLog = async () => {
         if (employee != '') {
             await axios
@@ -66,19 +62,6 @@ const DailyTimeRecordsPage = () => {
                 });
         }
     };
-
-    const employeeSelect = (
-        <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Employee</InputLabel>
-            <Select labelId="demo-simple-select-label" id="demo-simple-select" value={employee} label="Employee" onChange={handleChange}>
-                {employees.map((emp) => (
-                    <MenuItem key={emp.name} value={emp.id}>
-                        {emp.name}
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
-    );
 
     const dtrFilterSelect = (
         <FormControl fullWidth>
@@ -125,18 +108,6 @@ const DailyTimeRecordsPage = () => {
             {dtrsHasLoaded && <DataTable rows={dtrs} columns={columns} />}
             <br />
             <br />
-            {/* <Grid container justifyContent="center" alignItems="center" direction="column">
-                <Typography variant="h5" color="#D0D0D0">
-                    Simulation of adding time logs
-                </Typography>
-                <Typography variant="h6" color="#D0D0D0">
-                    Actual implementation of time logs with face recognition is currently work in progress.
-                </Typography>
-                <br />
-            </Grid>
-            {hasLoaded && employeeSelect}
-            <br />
-            <br /> */}
             {dtrsHasLoaded && (
                 <Grid container justifyContent="flex-end" spacing={2}>
                     <Grid item>

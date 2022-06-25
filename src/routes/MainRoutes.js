@@ -15,12 +15,10 @@ const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialI
 const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons')));
 
 // sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
-const FaceRecognitionPage = Loadable(lazy(() => import('views/face-recognition')));
+const DevelopersPage = Loadable(lazy(() => import('views/developers')));
 const EmployeesPage = Loadable(lazy(() => import('views/employees')));
 const UsersPage = Loadable(lazy(() => import('views/users')));
 const DailyTimeRecordsPage = Loadable(lazy(() => import('views/daily-time-records')));
-const FaceEnrollPage = Loadable(lazy(() => import('views/face-enroll')));
 const CreateEmployeePage = Loadable(lazy(() => import('views/employees/create')));
 const CreateUserPage = Loadable(lazy(() => import('views/users/create')));
 const UserProfilePage = Loadable(lazy(() => import('views/users/profile')));
@@ -60,12 +58,8 @@ const MainRoutes = {
             element: <UtilsMaterialIcons />
         },
         {
-            path: '/sample-page',
-            element: <SamplePage />
-        },
-        {
-            path: '/face-recognition',
-            element: <FaceRecognitionPage />
+            path: '/developers',
+            element: <DevelopersPage />
         },
         {
             path: '/employees',
@@ -90,10 +84,6 @@ const MainRoutes = {
         {
             path: '/daily-time-records',
             element: <DailyTimeRecordsPage />
-        },
-        {
-            path: '/face-enroll',
-            element: <FaceEnrollPage />
         }
     ]
 };
