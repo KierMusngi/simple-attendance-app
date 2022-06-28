@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { Box, Grid, Typography } from '@mui/material';
 
 // project imports
@@ -44,11 +44,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     }
 }));
 
-// ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
-
 const EarningCard = ({ isLoading, name, count }) => {
-    const theme = useTheme();
-
     return (
         <>
             {isLoading ? (
@@ -69,9 +65,8 @@ const EarningCard = ({ isLoading, name, count }) => {
                             <Grid item sx={{ mb: 1.25 }}>
                                 <Typography
                                     sx={{
-                                        fontSize: '1rem',
-                                        fontWeight: 500,
-                                        color: theme.palette.secondary[200]
+                                        fontSize: '1.8rem',
+                                        fontWeight: 400
                                     }}
                                 >
                                     {name}
