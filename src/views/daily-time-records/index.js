@@ -32,6 +32,17 @@ const DailyTimeRecordsPage = () => {
         });
     };
 
+    const openGate = async () => {
+        await axios
+            .get('http://192.168.1.100/open-gate')
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
     const getDailyTimeRecords = async () => {
         await axios.get(`${config.backendUri}/daily-time-records`).then((res) => {
             setDtrs(res.data);
@@ -63,6 +74,23 @@ const DailyTimeRecordsPage = () => {
         }
     };
 
+    const handleChange = (event) => {
+        setEmployee(event.target.value);
+    };
+
+    const employeeSelect = (
+        <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+            <Select labelId="demo-simple-select-label" id="demo-simple-select" value={employee} label="Employee" onChange={handleChange}>
+                {employees.map((emp) => (
+                    <MenuItem key={emp.name} value={emp.id}>
+                        {emp.name}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
+    );
+
     const dtrFilterSelect = (
         <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label1">Filter By</InputLabel>
@@ -90,7 +118,8 @@ const DailyTimeRecordsPage = () => {
         { field: 'employeeName', headerName: 'Employee', width: 300 },
         { field: 'employeePosition', headerName: 'Position', width: 300 },
         { field: 'timeIn', headerName: 'Time In', width: 300 },
-        { field: 'timeOut', headerName: 'Time Out', width: 300 }
+        { field: 'timeOut', headerName: 'Time Out', width: 300 },
+        { field: 'totalHours', headerName: 'Total Hours', width: 300 }
     ];
 
     useEffect(() => {
@@ -108,6 +137,9 @@ const DailyTimeRecordsPage = () => {
             {dtrsHasLoaded && <DataTable rows={dtrs} columns={columns} />}
             <br />
             <br />
+            {hasLoaded && employeeSelect}
+            <br />
+            <br />
             {dtrsHasLoaded && (
                 <Grid container justifyContent="flex-end" spacing={2}>
                     <Grid item>
@@ -119,7 +151,12 @@ const DailyTimeRecordsPage = () => {
                     </Grid>
                     <Grid item>
                         <Button variant="contained" color="secondary" onClick={timeLog}>
-                            Time In
+                            Manual Time Entry
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" color="secondary" onClick={openGate}>
+                            Open Gate
                         </Button>
                     </Grid>
                 </Grid>
