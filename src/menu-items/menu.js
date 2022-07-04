@@ -66,15 +66,7 @@ const menu = {
             url: '/developers',
             icon: icons.IconMoodHappy,
             breadcrumbs: false
-        },
-        // {
-        //     id: 'cam',
-        //     title: 'Face Recognition',
-        //     type: 'item',
-        //     url: '/face-recognition',
-        //     icon: icons.IconDeviceCctv,
-        //     breadcrumbs: false
-        // }
+        }
     ]
 };
 
