@@ -54,8 +54,7 @@ const EmployeesPage = () => {
     const columns = [
         { field: 'id', headerName: 'Id', width: 300 },
         { field: 'name', headerName: 'Name', width: 300 },
-        { field: 'position', headerName: 'Postion', width: 300 },
-        { field: 'actions', headerName: 'Actions', width: 300 }
+        { field: 'position', headerName: 'Postion', width: 300 }
     ];
 
     return (
